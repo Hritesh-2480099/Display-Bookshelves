@@ -2,7 +2,7 @@
 <suite name="UrbanLadder">
     <test name="All Tests">
         <classes>
-            <class name="tests.AllTests"/>
+            <class name="tests.HomePageTest"/>
         </classes>
     </test>
 </suite>
