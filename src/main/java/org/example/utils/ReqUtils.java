@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.io.FileHandler;
 
 public class ReqUtils {
@@ -17,8 +19,36 @@ public class ReqUtils {
 
     public ReqUtils(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.actions = new Actions(driver);
+    }
+
+    public void waitForPageload(){
+        wait.until(driver ->
+                ((JavascriptExecutor) driver)
+                        .executeScript("return document.readyState")
+                                .equals("complete"));
+    }
+
+    public void waitForVisibleImages() {
+        wait.until(driver -> {
+            List<WebElement> images = driver.findElements(By.tagName("img"));
+
+            for (WebElement img : images) {
+                if (img.isDisplayed()) {
+                    Boolean loaded = (Boolean) ((JavascriptExecutor) driver)
+                            .executeScript(
+                                    "return arguments[0].complete && arguments[0].naturalWidth > 0",
+                                    img
+                            );
+
+                    if (!loaded) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
     }
 
     // Wait for visibility
@@ -34,13 +64,13 @@ public class ReqUtils {
     // Type
     public void type(WebElement element, String text) {
         WebElement el = visible(element);
-        el.clear();
+//        el.clear();
         el.sendKeys(text);
     }
 
     // Hover
     public void hover(WebElement element) {
-        actions.moveToElement(visible(element)).perform();
+        actions.moveToElement(visible(element)).pause(1000).perform();
     }
 
     // Scroll
