@@ -9,8 +9,6 @@ public class HomePageTest extends BaseSetup {
     @Test
     public  void testLivingMenu(){
         HomePage home = new HomePage(driver);
-//        home.checkPageLoad();
-        home.waitFor();
         home.getLivingMenuItemsList();
     }
 }
