@@ -4,12 +4,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
-
 import org.openqa.selenium.io.FileHandler;
 
 public class ReqUtils {
@@ -58,7 +56,7 @@ public class ReqUtils {
 
     // Click
     public void click(WebElement element) {
-        visible(element).click();
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
     // Type
