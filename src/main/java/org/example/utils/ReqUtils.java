@@ -23,34 +23,6 @@ public class ReqUtils {
         this.actions = new Actions(driver);
     }
 
-    public void waitForPageload(){
-        wait.until(driver ->
-                ((JavascriptExecutor) driver)
-                        .executeScript("return document.readyState")
-                                .equals("complete"));
-    }
-
-    public void waitForVisibleImages() {
-        wait.until(driver -> {
-            List<WebElement> images = driver.findElements(By.tagName("img"));
-
-            for (WebElement img : images) {
-                if (img.isDisplayed()) {
-                    Boolean loaded = (Boolean) ((JavascriptExecutor) driver)
-                            .executeScript(
-                                    "return arguments[0].complete && arguments[0].naturalWidth > 0",
-                                    img
-                            );
-
-                    if (!loaded) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        });
-    }
-
     // Wait for visibility
     public WebElement visible(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));

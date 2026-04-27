@@ -18,11 +18,6 @@ public class HomePage extends BasePage {
 
     }
 
-    public void waitFor(){
-        utils.waitForPageload();
-        utils.waitForVisibleImages();
-    }
-
     //Locators
     @FindBy(xpath = "//div[@data-testid='header-logo']/child::img[@alt='logo']")
     private WebElement logo;
