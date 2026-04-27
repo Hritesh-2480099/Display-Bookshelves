@@ -2,6 +2,7 @@ package org.example.pages;
 
 import org.example.base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +23,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[@data-testid='header-logo']/child::img[@alt='logo']")
     private WebElement logo;
 
+    @FindBy(xpath = "//input[@id='searchInput']")
+    private WebElement searchBox;
+
     @FindBy(xpath = "//img[@alt='Bookshelves']/parent::div/parent::a")
     private WebElement bookShelves;
 
@@ -41,7 +45,8 @@ public class HomePage extends BasePage {
     public void checkPageLoad(){ utils.visible(logo); }
 
     public void goToBookshelvesPage(){
-        utils.click(bookShelves);
+        utils.click(searchBox);
+        utils.type(searchBox,"Bookshelves", Keys.ENTER);
     }
 
     public void goToGiftcardsPage(){
