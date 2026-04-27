@@ -34,10 +34,10 @@ public class ReqUtils {
     }
 
     // Type
-    public void type(WebElement element, String text) {
+    public void type(WebElement element, CharSequence... keys) {
         WebElement el = visible(element);
 //        el.clear();
-        el.sendKeys(text);
+        el.sendKeys(keys);
     }
 
     // Hover
