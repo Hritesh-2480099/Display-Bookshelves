@@ -47,7 +47,7 @@ public class BookShelvesTest {
             }
             if (count == 3)
                 break;
-        }
+        }]
     }
 
     @Test(priority = 5)
