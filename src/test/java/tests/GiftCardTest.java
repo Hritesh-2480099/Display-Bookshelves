@@ -3,9 +3,15 @@ package tests;
 import org.example.pages.GiftcardsPage;
 import org.example.utils.DriverManager;
 import org.example.utils.ReqUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 
 public class GiftCardTest {
@@ -31,7 +37,14 @@ public class GiftCardTest {
         ReqUtils utils=new ReqUtils(DriverManager.getDriver());
         String actualResult=GiftcardsPage.validateEmail();
         String expectedResult="Valid Email ID";
+        WebDriverWait wait=new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(20));
         try{
+            WebElement errorMsg = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//div[contains(text(),'Enter valid Email ID')]")
+                    )
+            );
+            utils.scrollIntoView(errorMsg);
             Assert.assertEquals(actualResult,expectedResult,"Email ID validation failed");
 
         }catch (AssertionError e){
@@ -45,7 +58,14 @@ public class GiftCardTest {
         ReqUtils utils=new ReqUtils(DriverManager.getDriver());
         String actualResult=GiftcardsPage.validateMobile();
         String expectedResult="Valid Mobile Number";
+        WebDriverWait wait=new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(20));
         try{
+            WebElement errorMsg = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//div[contains(text(),'Enter valid Mobile Number')]")
+                    )
+            );
+            utils.scrollIntoView(errorMsg);
             Assert.assertEquals(actualResult,expectedResult,"Mobile number validation failed");
 
         }catch (AssertionError e){

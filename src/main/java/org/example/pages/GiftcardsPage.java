@@ -88,11 +88,6 @@ public class GiftcardsPage extends BasePage {
      * Method to fill gift card form and validate email error message
      */
 
-    public static void scrollView(WebElement element) {
-        ((JavascriptExecutor) DriverManager.getDriver())
-                .executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
     public void giftCardPage() {
 
         // Navigate to Gift Cards page from Home Page
@@ -142,7 +137,6 @@ public class GiftcardsPage extends BasePage {
                             By.xpath("//div[contains(text(),'Enter valid Email ID')]")
                     )
             );
-            scrollView(errorMsg);
             return "Invalid Email ID";
         } catch (TimeoutException e) {
             return "Valid Email ID";
@@ -159,7 +153,6 @@ public class GiftcardsPage extends BasePage {
                             By.xpath("//div[contains(text(),'Enter valid Mobile Number')]")
                     )
             );
-            scrollView(errorMsg);
             return "Invalid Mobile Number";
         } catch (TimeoutException e) {
             return "Valid Mobile Number";

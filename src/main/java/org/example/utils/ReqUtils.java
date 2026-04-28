@@ -65,7 +65,7 @@ public class ReqUtils {
     // Scroll
     public void scrollIntoView(WebElement element) {
         ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView(true);", element);
+                .executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 
     // Get text
