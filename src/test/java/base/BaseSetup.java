@@ -7,14 +7,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 
 import java.time.Duration;
 
 public class BaseSetup {
     protected WebDriver driver;
     String baseURL = "https://www.urbanladder.com/";
-    @BeforeClass
+    @BeforeTest
     public void setUp(){
         driver = new ChromeDriver();
         driver.get(baseURL);
@@ -22,7 +24,7 @@ public class BaseSetup {
         driver.manage().window().maximize();
     }
 
-    @AfterClass
+    @AfterTest
     public void closeDriver(){
         if(driver != null){
             driver.quit();
