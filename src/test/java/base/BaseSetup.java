@@ -11,10 +11,12 @@ public class BaseSetup {
     @BeforeTest
     public void setUp() {
         DriverManager.getDriver().get(baseURL);
+        System.out.println("Browser Opened");
     }
 
     @AfterTest
     public void tearDown() {
         DriverManager.quitDriver();
+        System.out.println("Browser Closed");
     }
 }

@@ -1,15 +1,8 @@
 package org.example.pages;
 
 import org.example.base.BasePage;
-import org.example.utils.DriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.List;
 
 /**
  * Page Object class representing Gift Cards page
@@ -49,7 +42,7 @@ public class GiftcardsPage extends BasePage {
 
     // Sender email input field
     @FindBy(xpath = "//*[@id='sender-details']//*[@id='email']")
-    static private WebElement sender_Email;
+    private WebElement sender_Email;
 
     // Sender mobile number input field
     @FindBy(xpath = "//*[@id='sender-details']//*[@id='telephone']")
@@ -67,20 +60,28 @@ public class GiftcardsPage extends BasePage {
 
     // Receiver email input field
     @FindBy(xpath = "//*[@id='receiver-details']//*[@id='email']")
-    static private WebElement receiver_Email;
+    private WebElement receiver_Email;
 
     // Receiver gift message textarea
     @FindBy(xpath = "//*[@id='receiver-details']//*[@id='giftMessage']")
     private WebElement receiver_msg;
-    // Invalid Email
-    @FindBy(xpath ="//div[contains(text(),'Enter valid Email ID')]")
-    private WebElement validEmail;
 
     @FindBy(xpath = "//button[normalize-space()='PREVIEW E-GIFT-CARD']")
     private WebElement previewButton;
 
     @FindBy(xpath = "//div[@data-index='2']//img")
     private WebElement chooseWishImage;
+
+    /* ===================== Error Details Fields ===================== */
+
+    // Invalid Email
+    @FindBy(xpath ="//div[contains(text(),'Enter valid Email ID')]")
+    private WebElement errorEmailMsg;
+
+    //Invalid Mobile Number
+    @FindBy(xpath = "//div[contains(text(),'Enter valid Mobile Number')]")
+    private WebElement errorNumMsg;
+
     // Home page reference to navigate to Gift Cards
     HomePage page = new HomePage(driver);
 
@@ -88,7 +89,7 @@ public class GiftcardsPage extends BasePage {
      * Method to fill gift card form and validate email error message
      */
 
-    public void giftCardPage() {
+    public String giftCardPage() {
 
         // Navigate to Gift Cards page from Home Page
         page.goToGiftcardsPage();
@@ -127,16 +128,13 @@ public class GiftcardsPage extends BasePage {
         utils.scrollIntoView(receiver_msg);
         utils.scrollIntoView(previewButton);
 
+        return driver.getTitle();
     }
-    public static String validateEmail(){
+    public String validateEmail(){
         // Capture validation error message for invalid receiver email
-        WebDriverWait wait=new WebDriverWait(DriverManager.getDriver(),Duration.ofSeconds(20));
         try {
-            WebElement errorMsg = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//div[contains(text(),'Enter valid Email ID')]")
-                    )
-            );
+            utils.visible(errorEmailMsg);
+            utils.scrollIntoView(errorEmailMsg);
             return "Invalid Email ID";
         } catch (TimeoutException e) {
             return "Valid Email ID";
@@ -144,15 +142,11 @@ public class GiftcardsPage extends BasePage {
 
     }
 
-    public static String validateMobile(){
+    public String validateMobile(){
         // Capture validation error message for invalid receiver email
-        WebDriverWait wait=new WebDriverWait(DriverManager.getDriver(),Duration.ofSeconds(20));
         try {
-            WebElement errorMsg = wait.until(
-                    ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//div[contains(text(),'Enter valid Mobile Number')]")
-                    )
-            );
+            utils.visible(errorNumMsg);
+            utils.scrollIntoView(errorNumMsg);
             return "Invalid Mobile Number";
         } catch (TimeoutException e) {
             return "Valid Mobile Number";
