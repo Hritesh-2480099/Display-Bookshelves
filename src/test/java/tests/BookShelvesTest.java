@@ -62,6 +62,14 @@ public class BookShelvesTest {
     }
 
     @Test(priority = 5)
+    public void takeScreenShot(){
+        List<WebElement> products = bookPage.getProducts();
+        ReqUtils utils = new ReqUtils(DriverManager.getDriver());
+        utils.scrollIntoView(products.get(0));
+        utils.screenShot("Top_Three_BookShelves");
+    }
+
+    @Test(priority = 6)
     public void navigateToHomePage(){
         String actualTitle = bookPage.navigateToHomePage();
         String expectedTitle = "Buy Furniture Online: Upto 70% off in this Festive Season";
