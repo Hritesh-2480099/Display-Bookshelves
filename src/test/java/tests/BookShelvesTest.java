@@ -3,17 +3,21 @@ package tests;
 import java.util.List;
 import org.example.pages.BookShelvesPage;
 import org.example.utils.DriverManager;
+import org.example.utils.ReqUtils;
 import org.openqa.selenium.*;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class BookShelvesTest {
 
     BookShelvesPage bookPage;
+    ReqUtils utils;
 
     @BeforeMethod
     public void init() {
         bookPage = new BookShelvesPage(DriverManager.getDriver());
+        utils = new ReqUtils(DriverManager.getDriver());
     }
 
 
@@ -24,7 +28,14 @@ public class BookShelvesTest {
 
     @Test(priority = 2)
     public void clickFilter(){
-        bookPage.openFilters();
+        String actualTitle = bookPage.openFilters();
+        String expectedTitle = "Filter and Sort";
+        try{
+            Assert.assertEquals(actualTitle,expectedTitle,"Filter and Sort Button not Working");
+        }catch (AssertionError e){
+            utils.screenShot("fFilterContainer");
+            throw e;
+        }
     }
 
     @Test(priority = 3)
@@ -47,12 +58,20 @@ public class BookShelvesTest {
             }
             if (count == 3)
                 break;
-        }]
+        }
     }
 
     @Test(priority = 5)
     public void navigateToHomePage(){
-        bookPage.navigateToHomePage();
+        String actualTitle = bookPage.navigateToHomePage();
+        String expectedTitle = "Buy Furniture Online: Upto 70% off in this Festive Season";
+        try{
+            Assert.assertEquals(actualTitle,expectedTitle,"Navigation to Homepage failed");
+        }catch (AssertionError e){
+            utils.screenShot("fFilterContainer");
+            throw e;
+        }
+
     }
 
 }

@@ -5,6 +5,7 @@
             <class name="base.BaseSetup"/>
             <class name="tests.BookShelvesTest"/>
             <class name="tests.HomePageTest"/>
+            <class name="tests.GiftCardTest"/>
         </classes>
     </test>
 </suite>
