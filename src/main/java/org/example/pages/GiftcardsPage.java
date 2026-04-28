@@ -101,8 +101,10 @@ public class GiftcardsPage extends BasePage {
         utils.visible(amount);
 
         // Enter gift card amount and quantity
-        amount.sendKeys("1000");
-        quantity.sendKeys("2");
+//        amount.sendKeys("1000");
+        utils.type(amount,"1000");
+//        quantity.sendKeys("2");
+        utils.type(quantity,"2");
 
         // Explicit wait for gift card theme
         WebElement theme = utils.waitForPresence(chooseWishImage);
@@ -112,17 +114,26 @@ public class GiftcardsPage extends BasePage {
         utils.clickByJavascript(theme);
         /* ===================== Fill Sender Details ===================== */
 
-        sender_firstName.sendKeys("Prince");
-        sender_lastName.sendKeys("Kumar");
-        sender_Email.sendKeys("abc@gmailcom");
-        sender_mobileNumber.sendKeys("999999999999");
+//        sender_firstName.sendKeys("Prince");
+        utils.type(sender_firstName,"Prince");
+//        sender_lastName.sendKeys("Kumar");
+        utils.type(sender_lastName,"Kumar");
+//        sender_Email.sendKeys("abc@gmailcom");
+        utils.type(sender_Email,"abc@gmailcom"); // Invalid email to trigger validation
+//        sender_mobileNumber.sendKeys("999999999999");
+        utils.type(sender_mobileNumber,"999999999999"); // Invalid Mobile Number to trigger validation
 
         /* ===================== Fill Receiver Details ===================== */
 
-        receiver_firstName.sendKeys("Adam");
-        receiver_lastName.sendKeys("Gilchrist");
-        receiver_Email.sendKeys("xyz@gmail.com"); // Invalid email to trigger validation
-        receiver_msg.sendKeys("Happy birthday yaar.....");
+//        receiver_firstName.sendKeys("Adam");
+        utils.type(receiver_firstName,"Adam");
+//        receiver_lastName.sendKeys("Gilchrist");
+        utils.type(receiver_lastName,"Gilchrist");
+//        receiver_Email.sendKeys("xyz@gmail.com");
+        utils.type(receiver_Email,"xyz@gmail.com");
+//        receiver_msg.sendKeys("Happy birthday yaar.....");
+        utils.type(receiver_msg,"Happy birthday yaar.....");
+
 
         // Scroll to gift message field
         utils.scrollIntoView(receiver_msg);
