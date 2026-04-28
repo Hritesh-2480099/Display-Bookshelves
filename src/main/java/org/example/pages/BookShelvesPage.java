@@ -26,6 +26,9 @@ public class BookShelvesPage extends BasePage {
     @FindBy(id = "productsContainer")
     private WebElement filtersButton;
 
+    @FindBy(xpath = "//div[text()='Filter and Sort']")
+    private WebElement filterContainer;
+
     @FindBy(css = "[aria-label='Storage Type']")
     private WebElement storageType;
 
@@ -57,16 +60,23 @@ public class BookShelvesPage extends BasePage {
         home.goToBookshelvesPage();
     }
 
-    public void openFilters() {
+    public String openFilters() {
         utils.click(filtersButton);
+        return utils.visible(filterContainer).getText();
     }
 
     public void applyFilter(String price) {
         filterWait.until(ExpectedConditions.elementToBeClickable(storageType));
         actions.moveToElement(storageType).click().perform();
 
+        filterWait.until(ExpectedConditions.elementToBeClickable(openStorage));
+        actions.moveToElement(openStorage).click().perform();
+
         filterWait.until(ExpectedConditions.elementToBeClickable(availability));
         actions.moveToElement(availability).click().perform();
+
+        filterWait.until(ExpectedConditions.elementToBeClickable(withStorage));
+        actions.moveToElement(withStorage).click().perform();
 
         filterWait.until(ExpectedConditions.elementToBeClickable(priceFilter));
         actions.moveToElement(priceFilter).click().perform();
@@ -99,10 +109,8 @@ public class BookShelvesPage extends BasePage {
         return Integer.parseInt(priceEl.getText().replaceAll("[^0-9]", ""));
     }
 
-    public void navigateToHomePage(){
-        System.out.println("prev"+driver.getTitle());
+    public String navigateToHomePage(){
         driver.navigate().to("https://www.urbanladder.com/");
-        System.out.println("Next"+driver.getTitle());
-
+        return driver.getTitle();
     }
 }

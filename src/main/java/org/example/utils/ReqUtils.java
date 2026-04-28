@@ -26,9 +26,28 @@ public class ReqUtils {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    //wait for presence
+    public WebElement waitForPresence(WebElement element){
+        return wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//div[@data-index='2']//img")
+                )
+        );
+    }
+
     // Click
     public void click(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    //click by js
+    public void clickByJavascript(WebElement theme) {
+        JavascriptExecutor js2 = (JavascriptExecutor) driver;
+        js2.executeScript(
+                "arguments[0].click();",
+                theme
+        );
+
     }
 
     // Type
