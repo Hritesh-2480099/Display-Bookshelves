@@ -58,10 +58,12 @@ public class BookShelvesPage extends BasePage {
 
     public void searchBookshelves() {
         home.goToBookshelvesPage();
+        System.out.println("Navigated to BookShelves Listing Page");
     }
 
     public String openFilters() {
         utils.click(filtersButton);
+        System.out.println("All Filter button Clicked and Filter Container Opened");
         return utils.visible(filterContainer).getText();
     }
 
