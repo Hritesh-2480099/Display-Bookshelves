@@ -56,7 +56,7 @@ public class BookShelvesTest extends BaseSetup {
             }
             if (count == 3)
                 break;
-        }
+        }]
     }
 
     @Test(priority = 7)
