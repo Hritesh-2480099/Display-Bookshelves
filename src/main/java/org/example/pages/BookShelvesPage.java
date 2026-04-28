@@ -61,30 +61,17 @@ public class BookShelvesPage extends BasePage {
         utils.click(filtersButton);
     }
 
-    public void applyStorageTypeFilter() {
+    public void applyFilter(String price) {
         filterWait.until(ExpectedConditions.elementToBeClickable(storageType));
         actions.moveToElement(storageType).click().perform();
 
-//        filterWait.until(ExpectedConditions.elementToBeClickable(openStorage));
-//        actions.moveToElement(openStorage).click().perform();
-    }
-
-    public void applyAvailabilityFilter() {
         filterWait.until(ExpectedConditions.elementToBeClickable(availability));
         actions.moveToElement(availability).click().perform();
 
-//        filterWait.until(ExpectedConditions.elementToBeClickable(withStorage));
-//        actions.moveToElement(withStorage).click().perform();
-    }
-
-    public void applyPriceFilter(String price) {
         filterWait.until(ExpectedConditions.elementToBeClickable(priceFilter));
         actions.moveToElement(priceFilter).click().perform();
 
-//        filterWait.until(ExpectedConditions.visibilityOf(maxPrice));
-//        maxPrice.clear();
-//        maxPrice.sendKeys(price);
-        utils.type(maxPrice,price);
+        utils.type(maxPrice,price,Keys.TAB);
 
         filterWait.until(ExpectedConditions.elementToBeClickable(applyButton));
         actions.moveToElement(applyButton).click().perform();

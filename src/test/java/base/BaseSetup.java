@@ -1,33 +1,20 @@
 package base;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
+import org.example.utils.DriverManager;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
-import java.time.Duration;
-
 public class BaseSetup {
-    protected WebDriver driver;
+
     String baseURL = "https://www.urbanladder.com/";
+
     @BeforeTest
-    public void setUp(){
-        driver = new ChromeDriver();
-        driver.get(baseURL);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().window().maximize();
+    public void setUp() {
+        DriverManager.getDriver().get(baseURL);
     }
 
     @AfterTest
-    public void closeDriver(){
-        if(driver != null){
-            driver.quit();
-        }
+    public void tearDown() {
+        DriverManager.quitDriver();
     }
 }
