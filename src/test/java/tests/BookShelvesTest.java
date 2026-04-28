@@ -1,21 +1,21 @@
 package tests;
 
 import java.util.List;
-
-import base.BaseSetup;
 import org.example.pages.BookShelvesPage;
+import org.example.utils.DriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class BookShelvesTest extends BaseSetup {
+public class BookShelvesTest {
 
     BookShelvesPage bookPage;
+
     @BeforeMethod
-    public void init(){
-        bookPage = new BookShelvesPage(driver);
+    public void init() {
+        bookPage = new BookShelvesPage(DriverManager.getDriver());
     }
+
 
     @Test(priority = 1)
     public void openBookPage(){
@@ -29,20 +29,11 @@ public class BookShelvesTest extends BaseSetup {
 
     @Test(priority = 3)
     public void clickStorageType(){
-        bookPage.applyStorageTypeFilter();
+        bookPage.applyFilter("15000");
     }
+
 
     @Test(priority = 4)
-    public void clickStorageAvailability(){
-        bookPage.applyAvailabilityFilter();
-    }
-
-    @Test(priority = 5)
-    public void clickPriceFilter(){
-        bookPage.applyPriceFilter("15000");
-    }
-
-    @Test(priority = 6)
     public  void printTopThreeProducts(){
         List<WebElement> products = bookPage.getProducts();
         System.out.println("\nFirst 3 Bookshelves below Rs. 15000:\n");
@@ -59,7 +50,7 @@ public class BookShelvesTest extends BaseSetup {
         }
     }
 
-    @Test(priority = 7)
+    @Test(priority = 5)
     public void navigateToHomePage(){
         bookPage.navigateToHomePage();
     }

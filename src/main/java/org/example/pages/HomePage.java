@@ -54,7 +54,7 @@ public class HomePage extends BasePage {
         utils.click(giftCards);
     }
 
-    public void getLivingMenuItemsList(){
+    public int getLivingMenuItemsList(){
         utils.hover(livingMenu);
         utils.visible(livingContainer);
         Map<String, List<String>> menuItems = new LinkedHashMap<>();
@@ -78,6 +78,7 @@ public class HomePage extends BasePage {
                 System.out.println("  ->  "+item);
             }
         }
+        return menuItems.size();
     }
 
 }
