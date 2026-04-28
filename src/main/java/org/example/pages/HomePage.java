@@ -44,6 +44,7 @@ public class HomePage extends BasePage {
     //Functions
     public void checkPageLoad(){ utils.visible(logo); }
 
+
     public void goToBookshelvesPage(){
         utils.click(searchBox);
         utils.type(searchBox,"Bookshelves", Keys.ENTER);

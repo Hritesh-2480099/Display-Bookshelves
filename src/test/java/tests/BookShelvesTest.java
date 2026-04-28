@@ -17,58 +17,51 @@ public class BookShelvesTest extends BaseSetup {
         bookPage = new BookShelvesPage(driver);
     }
 
-    @Test
+    @Test(priority = 1)
     public void openBookPage(){
         bookPage.searchBookshelves();
     }
 
-    public static void main(String[] args) {
+    @Test(priority = 2)
+    public void clickFilter(){
+        bookPage.openFilters();
+    }
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.urbanladder.com/");
+    @Test(priority = 3)
+    public void clickStorageType(){
+        bookPage.applyStorageTypeFilter();
+    }
 
-        System.out.println("lanch");
+    @Test(priority = 4)
+    public void clickStorageAvailability(){
+        bookPage.applyAvailabilityFilter();
+    }
 
-        BookShelvesPage shelves = new BookShelvesPage(driver);
+    @Test(priority = 5)
+    public void clickPriceFilter(){
+        bookPage.applyPriceFilter("15000");
+    }
 
-
-//        shelves.closePopupIfPresent();
-        shelves.searchBookshelves();
-        System.out.println("search");
-
-        shelves.openFilters();
-        System.out.println("filters");
-
-        shelves.applyStorageTypeFilter();
-        System.out.println("open");
-
-        shelves.applyAvailabilityFilter();
-        System.out.println("with storage");
-
-        shelves.applyPriceFilter("15000");
-        System.out.println("price");
-
-        List<WebElement> products = shelves.getProducts();
-
-        //System.out.println("Total products found: " + products.size());
+    @Test(priority = 6)
+    public  void printTopThreeProducts(){
+        List<WebElement> products = bookPage.getProducts();
         System.out.println("\nFirst 3 Bookshelves below Rs. 15000:\n");
-
         int count = 0;
-
         for (WebElement product : products) {
-
-            String name = shelves.getProductName(product);
-            int price = shelves.getProductPrice(product);
+            String name = bookPage.getProductName(product);
+            int price = bookPage.getProductPrice(product);
 
             if (price <= 15000) {
                 System.out.println(++count + ". " + name + " - Rs. " + price);
             }
-
             if (count == 3)
                 break;
         }
-
-        driver.navigate().back();
     }
+
+    @Test(priority = 7)
+    public void navigateToHomePage(){
+        bookPage.navigateToHomePage();
+    }
+
 }

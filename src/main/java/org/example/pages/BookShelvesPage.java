@@ -65,30 +65,31 @@ public class BookShelvesPage extends BasePage {
         filterWait.until(ExpectedConditions.elementToBeClickable(storageType));
         actions.moveToElement(storageType).click().perform();
 
-        filterWait.until(ExpectedConditions.elementToBeClickable(openStorage));
-        actions.moveToElement(openStorage).click().perform();
+//        filterWait.until(ExpectedConditions.elementToBeClickable(openStorage));
+//        actions.moveToElement(openStorage).click().perform();
     }
 
     public void applyAvailabilityFilter() {
         filterWait.until(ExpectedConditions.elementToBeClickable(availability));
         actions.moveToElement(availability).click().perform();
 
-        filterWait.until(ExpectedConditions.elementToBeClickable(withStorage));
-        actions.moveToElement(withStorage).click().perform();
+//        filterWait.until(ExpectedConditions.elementToBeClickable(withStorage));
+//        actions.moveToElement(withStorage).click().perform();
     }
 
     public void applyPriceFilter(String price) {
         filterWait.until(ExpectedConditions.elementToBeClickable(priceFilter));
         actions.moveToElement(priceFilter).click().perform();
 
-        filterWait.until(ExpectedConditions.visibilityOf(maxPrice));
-        maxPrice.clear();
-        maxPrice.sendKeys(price);
+//        filterWait.until(ExpectedConditions.visibilityOf(maxPrice));
+//        maxPrice.clear();
+//        maxPrice.sendKeys(price);
+        utils.type(maxPrice,price);
 
         filterWait.until(ExpectedConditions.elementToBeClickable(applyButton));
         actions.moveToElement(applyButton).click().perform();
 
-        // ✅ wait until products refresh
+        // wait until products refresh
         filterWait.until(driver -> !products.isEmpty());
     }
 
@@ -109,5 +110,12 @@ public class BookShelvesPage extends BasePage {
         WebElement priceEl =
                 product.findElement(By.xpath(".//div[@class='UYQNp']"));
         return Integer.parseInt(priceEl.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public void navigateToHomePage(){
+        System.out.println("prev"+driver.getTitle());
+        driver.navigate().to("https://www.urbanladder.com/");
+        System.out.println("Next"+driver.getTitle());
+
     }
 }
