@@ -5,8 +5,10 @@ import org.example.pages.BookShelvesPage;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(TestListener.class)
 public class BookShelvesTest extends BaseSetup {
 
     BookShelvesPage bookPage;
@@ -45,8 +47,6 @@ public class BookShelvesTest extends BaseSetup {
         String actualTitle = bookPage.navigateToHomePage();
         String expectedTitle = "Buy Furniture Online: Upto 70% off in this Festive Season";
         Assert.assertEquals(actualTitle,expectedTitle,"Navigation to Homepage failed");
-
-
     }
 
 }

@@ -131,6 +131,7 @@ public class BookShelvesPage extends BasePage {
                 break;
         }
         utils.scrollIntoView(products.get(0));
+        utils.screenShot("Top_Three_BookShelves");
     }
     public String navigateToHomePage(){
         driver.navigate().to("https://www.urbanladder.com/");
