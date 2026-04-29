@@ -58,12 +58,12 @@ public class BookShelvesPage extends BasePage {
 
     public void searchBookshelves() {
         home.goToBookshelvesPage();
-        System.out.println("Navigated to BookShelves Listing Page");
+        log.info("Navigated to BookShelves Listing Page");
     }
 
     public String openFilters() {
         utils.click(filtersButton);
-        System.out.println("All Filter button Clicked and Filter Container Opened");
+        log.info("All Filter button Clicked and Filter Container Opened");
 
         return utils.getText(filterContainer);
     }
@@ -73,24 +73,27 @@ public class BookShelvesPage extends BasePage {
 
         filterWait.until(ExpectedConditions.elementToBeClickable(storageType));
         actions.moveToElement(storageType).click().perform();
-        System.out.println("Storage Type filter clicked");
+        log.info("Storage Type filter clicked");
         filterWait.until(ExpectedConditions.elementToBeClickable(openStorage));
         actions.moveToElement(openStorage).click().perform();
-        System.out.println("Storage Type : Open Storage Selected");
+        log.info("Storage Type : Open Storage Selected");
+
         filterWait.until(ExpectedConditions.elementToBeClickable(availability));
         actions.moveToElement(availability).click().perform();
-        System.out.println("Availability Filter Clicked");
+        log.info("Availability Filter Clicked");
         filterWait.until(ExpectedConditions.elementToBeClickable(withStorage));
         actions.moveToElement(withStorage).click().perform();
-        System.out.println("Availability : With Storage Selected");
+        log.info("Availability : With Storage Selected");
+
         filterWait.until(ExpectedConditions.elementToBeClickable(priceFilter));
         actions.moveToElement(priceFilter).click().perform();
-        System.out.println("Price Filter Clicked");
+        log.info("Price Filter Clicked");
         utils.type(maxPrice,price,Keys.TAB);
-        System.out.println("Set Max Price to Rs.15000/-");
+        log.info("Set Max Price to Rs.15000/-");
+
         filterWait.until(ExpectedConditions.elementToBeClickable(applyButton));
         actions.moveToElement(applyButton).click().perform();
-        System.out.println("Apply Button Clicked");
+        log.info("Apply Button Clicked");
         // wait until products refresh
         filterWait.until(driver -> !products.isEmpty());
     }
@@ -114,9 +117,24 @@ public class BookShelvesPage extends BasePage {
         return Integer.parseInt(priceEl.getText().replaceAll("[^0-9]", ""));
     }
 
+    public void topThreeProducts(){
+        System.out.println("\nFirst 3 Bookshelves below Rs. 15000:\n");
+        int count = 0;
+        for (WebElement product : products) {
+            String name = getProductName(product);
+            int price = getProductPrice(product);
+
+            if (price <= 15000) {
+                System.out.println(++count + ". " + name + " - Rs. " + price);
+            }
+            if (count == 3)
+                break;
+        }
+        utils.scrollIntoView(products.get(0));
+    }
     public String navigateToHomePage(){
         driver.navigate().to("https://www.urbanladder.com/");
-        System.out.println("Navigated Back to HomePage");
+        log.info("Navigated Back to HomePage");
         return driver.getTitle();
     }
 }

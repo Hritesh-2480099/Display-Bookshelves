@@ -1,22 +1,31 @@
 package base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.utils.DriverManager;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 
 public class BaseSetup {
 
-    String baseURL = "https://www.urbanladder.com/";
-
-    @BeforeTest
+    protected WebDriver driver;
+    protected Logger log = LogManager.getLogger(this.getClass());
+    final String baseURL = "https://www.urbanladder.com/";
+    @BeforeClass
     public void setUp() {
-        DriverManager.getDriver().get(baseURL);
-        System.out.println("Browser Opened");
+        log.info("===== TEST SETUP STARTED =====");
+
+        driver = DriverManager.getDriver();
+        driver.get(baseURL);
+
+        log.info("Browser launched and URL opened");
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         DriverManager.quitDriver();
-        System.out.println("Browser Closed");
+        log.info("Browser closed");
+        log.info("===== TEST TEARDOWN COMPLETED =====");
     }
 }
