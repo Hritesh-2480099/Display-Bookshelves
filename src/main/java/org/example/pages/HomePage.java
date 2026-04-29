@@ -48,16 +48,21 @@ public class HomePage extends BasePage {
     public void goToBookshelvesPage(){
         utils.click(searchBox);
         utils.type(searchBox,"Bookshelves", Keys.ENTER);
+        System.out.println("Bookshelves entered as input in search box and triggered for search");
     }
 
     public void goToGiftcardsPage(){
         utils.click(giftCards);
+        System.out.println("\nGift Card Navigation Link Clicked");
     }
 
     public int getLivingMenuItemsList(){
         utils.hover(livingMenu);
+        System.out.println("\nLiving Menu hovered");
         utils.visible(livingContainer);
+        System.out.println("Living Menu container Visible");
         Map<String, List<String>> menuItems = new LinkedHashMap<>();
+        System.out.println("Fetching Living Menu Items");
         for (WebElement subMenu : livingMenuItems){
             List<WebElement> subItems = subMenu.findElements(By.tagName("a"));
             if(subItems.isEmpty()) continue;
@@ -71,7 +76,7 @@ public class HomePage extends BasePage {
             }
             menuItems.put(header,items);
         }
-        System.out.println("Living Menu Items");
+        System.out.println("\nLiving Menu Items List");
         for (String header : menuItems.keySet()){
             System.out.println("\n"+header);
             for (String item : menuItems.get(header)){
