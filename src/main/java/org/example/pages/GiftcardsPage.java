@@ -93,28 +93,28 @@ public class GiftcardsPage extends BasePage {
 
         // Navigate to Gift Cards page from Home Page
         page.goToGiftcardsPage();
-        System.out.println("Navigated to Gift Card Page");
+        log.info("Navigated to Gift Card Page");
         // Switch to newly opened Gift Cards window/tab
         utils.switchToNew();
-        System.out.println("Driver Switched to Gift Card Tab");
+        log.info("Driver Switched to Gift Card Tab");
         // Wait until amount field is visible
-        System.out.println("Wait till everything is visible");
+        log.info("Wait till everything is visible");
         utils.visible(amount);
 
         // Enter gift card amount and quantity
 //        amount.sendKeys("1000");
         utils.type(amount,"1000");
-        System.out.println("Amount Entered : Rs.1000/-");
+        log.info("Amount Entered : Rs.1000/-");
 //        quantity.sendKeys("2");
         utils.type(quantity,"2");
-        System.out.println("Quality Entered : 2");
+        log.info("Quality Entered : 2");
         // Explicit wait for gift card theme
         WebElement theme = utils.waitForPresence(chooseWishImage);
         utils.scrollIntoView(theme);
         //ElementClickInterceptedException: element click intercepted: Element is not clickable
         //theme.click();
         utils.clickByJavascript(theme);
-        System.out.println("Theme Selected");
+        log.info("Theme Selected");
         /* ===================== Fill Sender Details ===================== */
 
 //        sender_firstName.sendKeys("Prince");
@@ -125,7 +125,7 @@ public class GiftcardsPage extends BasePage {
         utils.type(sender_Email,"abc@gmailcom"); // Invalid email to trigger validation
 //        sender_mobileNumber.sendKeys("999999999999");
         utils.type(sender_mobileNumber,"999999999999"); // Invalid Mobile Number to trigger validation
-        System.out.println("Entered Sender Details");
+        log.info("Entered Sender Details");
         /* ===================== Fill Receiver Details ===================== */
 
 //        receiver_firstName.sendKeys("Adam");
@@ -136,7 +136,7 @@ public class GiftcardsPage extends BasePage {
         utils.type(receiver_Email,"xyz@gmail.com");
 //        receiver_msg.sendKeys("Happy birthday yaar.....");
         utils.type(receiver_msg,"Happy birthday yaar.....");
-        System.out.println("Entered Receiver Details");
+        log.info("Entered Receiver Details");
 
         // Scroll to gift message field
         utils.scrollIntoView(receiver_msg);
