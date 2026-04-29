@@ -13,6 +13,7 @@ public class BookShelvesTest {
 
     BookShelvesPage bookPage;
     ReqUtils utils;
+    List<WebElement> products;
 
     @BeforeMethod
     public void init() {
@@ -46,7 +47,7 @@ public class BookShelvesTest {
 
     @Test(priority = 4)
     public  void printTopThreeProducts(){
-        List<WebElement> products = bookPage.getProducts();
+        products = bookPage.getProducts();
         System.out.println("\nFirst 3 Bookshelves below Rs. 15000:\n");
         int count = 0;
         for (WebElement product : products) {
@@ -63,8 +64,8 @@ public class BookShelvesTest {
 
     @Test(priority = 5)
     public void takeScreenShot(){
-        List<WebElement> products = bookPage.getProducts();
-        ReqUtils utils = new ReqUtils(DriverManager.getDriver());
+//        List<WebElement> products = bookPage.getProducts();
+        System.out.println("\nTaking ScreenShot of Top Three Bookshelves");
         utils.scrollIntoView(products.get(0));
         utils.screenShot("Top_Three_BookShelves");
     }
